@@ -1,0 +1,138 @@
+.header {
+  width: 100%;
+  background: #fff;
+  color: #252525;
+}
+
+.topRow {
+  min-height: 96px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 5.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.logo svg { width: 100%; height: 100%; }
+
+.storeName {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+.storeName span { font-weight: 400; }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 36px;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.iconButton svg { width: 23px; height: 23px; }
+
+.languageLabel select {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 0 8px 2px;
+}
+
+.navigation {
+  min-height: 54px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: clamp(24px, 4vw, 58px);
+  padding: 0 20px;
+}
+
+.navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 54px;
+  border-bottom: 2px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.navigation a:hover, .navigation a:focus-visible {
+  border-bottom-color: currentColor;
+}
+
+.iconButton:focus-visible, .logo:focus-visible, .storeName:focus-visible,
+.languageLabel select:focus-visible, .navigation a:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 3px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 700px) {
+  .topRow { min-height: 74px; padding: 0 18px; }
+  .logo { width: 32px; height: 32px; }
+  .storeName { font-size: 16px; }
+  .actions { gap: 9px; }
+  .iconButton { width: 26px; }
+  .iconButton svg { width: 20px; height: 20px; }
+  .profileButton { display: none; }
+  .navigation { min-height: 48px; gap: clamp(16px, 5vw, 30px); overflow-x: auto; justify-content: flex-start; }
+  .navigation a { min-height: 48px; font-size: 10px; }
+}
+
+@media (max-width: 390px) {
+  .topRow { padding: 0 12px; }
+  .logo { width: 28px; height: 28px; }
+  .storeName { font-size: 13px; letter-spacing: 0.08em; }
+  .actions { gap: 4px; }
+  .iconButton { width: 24px; }
+  .iconButton svg { width: 18px; height: 18px; }
+  .languageLabel select { font-size: 10px; }
+}
