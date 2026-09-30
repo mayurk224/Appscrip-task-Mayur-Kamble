@@ -2,6 +2,8 @@
   width: 100%;
   background: #fff;
   color: #252525;
+  position: relative;
+  z-index: 100;
 }
 
 .topRow {
@@ -11,8 +13,30 @@
   padding: 0 5.5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   position: relative;
+  gap: 16px;
+}
+
+.hamburgerButton {
+  display: none;
+  place-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+  order: 0;
+}
+
+.hamburgerButton svg {
+  width: 28px;
+  height: 28px;
 }
 
 .logo {
@@ -21,6 +45,7 @@
   height: 40px;
   align-items: center;
   flex: 0 0 auto;
+  order: 1;
 }
 
 .logo svg { width: 100%; height: 100%; }
@@ -36,6 +61,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   white-space: nowrap;
+  order: 2;
 }
 
 .storeName span { font-weight: 400; }
@@ -44,14 +70,18 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-left: auto;
+  order: 3;
 }
 
 .iconButton {
   display: inline-grid;
   place-items: center;
-  width: 28px;
-  height: 36px;
-  padding: 2px;
+  min-width: 48px;
+  min-height: 48px;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
   border: 0;
   background: transparent;
   color: inherit;
@@ -59,6 +89,13 @@
 }
 
 .iconButton svg { width: 23px; height: 23px; }
+
+.languageLabel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  min-width: 48px;
+}
 
 .languageLabel select {
   border: 0;
@@ -68,20 +105,173 @@
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  padding: 8px 0 8px 2px;
+  padding: 12px 10px;
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.mobileMenu {
+  display: none;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 16px 5.5%;
+}
+
+.mobileMenuOpen {
+  display: block;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileNav a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.mobileNav a:hover,
+.mobileNav a:focus-visible {
+  background: #f5f5f5;
+}
+
+.mobileMenuActions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.mobileMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.mobileMenuItem svg {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+}
+
+.mobileMenuItem:hover,
+.mobileMenuItem:focus-visible {
+  background: #f5f5f5;
+}
+
+.mobileLanguageLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 4px;
+}
+
+.mobileLanguageLabel:hover {
+  background: #f5f5f5;
+}
+
+.mobileLanguageText {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mobileLanguageLabel select {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 12px 10px;
+  min-height: 48px;
 }
 
 .navigation {
   min-height: 54px;
   border-top: 1px solid #f0f0f0;
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: clamp(24px, 4vw, 58px);
-  padding: 0 20px;
+  align-items: center;
+  padding: 0 5.5%;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 32px;
 }
 
-.navigation a {
+.breadcrumb {
+  display: none;
+}
+
+.breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.breadcrumb li + li::before {
+  content: ">";
+  margin-right: 8px;
+  color: #888;
+  font-weight: 400;
+}
+
+.breadcrumb a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.breadcrumb li[aria-current="page"] a {
+  font-weight: 700;
+  color: inherit;
+}
+
+.navLinks {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex: 1;
+  gap: clamp(24px, 4vw, 58px);
+}
+
+.navLinks a {
   display: inline-flex;
   align-items: center;
   min-height: 54px;
@@ -91,16 +281,26 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
+  padding: 0 4px;
 }
 
-.navigation a:hover, .navigation a:focus-visible {
+.navLinks a:hover, .navLinks a:focus-visible {
   border-bottom-color: currentColor;
 }
 
-.iconButton:focus-visible, .logo:focus-visible, .storeName:focus-visible,
-.languageLabel select:focus-visible, .navigation a:focus-visible {
+.hamburgerButton:focus-visible,
+.iconButton:focus-visible,
+.logo:focus-visible,
+.storeName:focus-visible,
+.languageLabel select:focus-visible,
+.mobileLanguageLabel select:focus-visible,
+.mobileNav a:focus-visible,
+.mobileMenuItem:focus-visible,
+.navLinks a:focus-visible,
+.breadcrumb a:focus-visible {
   outline: 2px solid #555;
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .visuallyHidden {
@@ -115,24 +315,92 @@
   border: 0;
 }
 
-@media (max-width: 700px) {
-  .topRow { min-height: 74px; padding: 0 18px; }
+@media (max-width: 768px) {
+  .topRow { min-height: 74px; padding: 0 18px; gap: 12px; }
+  .hamburgerButton { display: inline-grid; }
   .logo { width: 32px; height: 32px; }
   .storeName { font-size: 16px; }
-  .actions { gap: 9px; }
-  .iconButton { width: 26px; }
+  .actions { gap: 0; }
+  .iconButton { min-width: 48px; min-height: 48px; width: 48px; height: 48px; }
   .iconButton svg { width: 20px; height: 20px; }
   .profileButton { display: none; }
-  .navigation { min-height: 48px; gap: clamp(16px, 5vw, 30px); overflow-x: auto; justify-content: flex-start; }
-  .navigation a { min-height: 48px; font-size: 10px; }
+  .languageLabel { display: none; }
+  .navigation { min-height: 48px; padding: 0 18px; gap: 16px; }
+  .navLinks { display: none; }
+  .breadcrumb li,
+  .breadcrumb a {
+    font-size: 11px;
+  }
+  .mobileMenu {
+    padding: 16px 18px;
+  }
 }
 
-@media (max-width: 390px) {
-  .topRow { padding: 0 12px; }
+@media (max-width: 425px) {
+  .topRow { padding: 0 12px; gap: 8px; min-height: 64px; }
+  .hamburgerButton { min-width: 48px; min-height: 48px; width: 48px; height: 48px; padding: 8px; }
+  .hamburgerButton svg { width: 24px; height: 24px; }
   .logo { width: 28px; height: 28px; }
   .storeName { font-size: 13px; letter-spacing: 0.08em; }
-  .actions { gap: 4px; }
-  .iconButton { width: 24px; }
+  .actions { gap: 0; }
+  .iconButton { min-width: 40px; min-height: 40px; width: 40px; height: 40px; padding: 4px; }
   .iconButton svg { width: 18px; height: 18px; }
-  .languageLabel select { font-size: 10px; }
+  .navigation { padding: 0 12px; gap: 12px; min-height: 44px; }
+  .navLinks { display: none; }
+  .breadcrumb { display: flex; }
+  .breadcrumb li,
+  .breadcrumb a {
+    font-size: 10px;
+    min-height: 44px;
+  }
+  .mobileMenu {
+    padding: 12px 12px;
+  }
+  .mobileNav a {
+    min-height: 48px;
+    font-size: 13px;
+  }
+  .mobileMenuItem {
+    min-height: 48px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+  .topRow { padding: 0 10px; gap: 6px; }
+  .iconButton { min-width: 42px; width: 42px; padding: 6px; }
+  .storeName { font-size: 12px; letter-spacing: 0.06em; }
+  .mobileMenu { padding: 12px 10px; }
+}
+
+@media (max-width: 320px) {
+  .topRow { padding: 0 8px; gap: 4px; }
+  .hamburgerButton { min-width: 44px; min-height: 44px; width: 44px; height: 44px; padding: 6px; }
+  .hamburgerButton svg { width: 22px; height: 22px; }
+  .logo { width: 24px; height: 24px; }
+  .storeName { font-size: 11px; letter-spacing: 0.05em; }
+  .iconButton { min-width: 40px; min-height: 44px; width: 40px; height: 44px; padding: 5px; }
+  .iconButton svg { width: 16px; height: 16px; }
+  .navigation { padding: 0 8px; gap: 8px; min-height: 40px; }
+  .breadcrumb li,
+  .breadcrumb a {
+    font-size: 9px;
+    min-height: 40px;
+  }
+  .mobileMenu { padding: 10px 8px; }
+  .mobileNav a {
+    min-height: 44px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  .mobileMenuItem {
+    min-height: 44px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  .mobileMenuItem svg { width: 20px; height: 20px; }
+  .mobileLanguageLabel {
+    padding: 0 8px;
+    min-height: 44px;
+  }
 }

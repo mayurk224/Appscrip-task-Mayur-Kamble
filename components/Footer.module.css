@@ -1,0 +1,264 @@
+.footer {
+  width: 100%;
+  background: #050505;
+  color: #fff;
+  font-size: 13px;
+}
+
+.container {
+  width: min(100% - 80px, 1280px);
+  margin: 0 auto;
+  padding: 58px 0 24px;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(48px, 9vw, 140px);
+  padding-bottom: 48px;
+}
+
+.footer h2 {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+.mobileDescription, .mobileContactHeading { display: none; }
+
+.newsletter > p { margin-bottom: 30px; color: #e5e5e5; }
+
+.newsletterForm {
+  display: flex;
+  gap: 14px;
+  max-width: 585px;
+}
+
+.newsletterForm input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 18px;
+  border: 1px solid #fff;
+  border-radius: 0;
+  background: #fff;
+  color: #171717;
+  font: inherit;
+}
+
+.newsletterForm input::placeholder { color: #777; }
+
+.newsletterForm button {
+  min-width: 145px;
+  height: 48px;
+  padding: 0 20px;
+  border: 1px solid #777;
+  border-radius: 0;
+  background: #050505;
+  color: #929292;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.contactCurrency {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.contact, .currency { display: flex; flex-direction: column; align-items: flex-start; }
+.contactDetails { display: flex; flex-direction: column; align-items: flex-start; }
+.contact a { margin-bottom: 12px; color: #f1f1f1; }
+.contactSeparator { display: none; }
+.currency h2 { margin-bottom: 14px; }
+.currencyName { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 600; }
+.flag { width: 18px; height: 18px; display: inline-grid; place-items: center; overflow: hidden; border-radius: 50%; font-size: 17px; line-height: 1; }
+.currencyNote { max-width: 270px; color: #d5d5d5; font-size: 11px; line-height: 1.6; }
+
+.divider { height: 1px; background: #555; }
+
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: clamp(36px, 7vw, 110px);
+  padding: 48px 0 52px;
+}
+
+.accordionHeading {
+  display: block;
+  margin: 0 0 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  list-style: none;
+  cursor: default;
+}
+
+.mobileAccordionHeading { display: none; }
+.accordionContent { display: block; }
+.brand { font-size: 18px; letter-spacing: 0; text-transform: none; }
+.paymentSection { margin: 0; }
+.linkList { display: grid; gap: 13px; list-style: none; }
+.linkList a { color: #f1f1f1; font-size: 12px; }
+.linkList a:hover, .contact a:hover { color: #aaa; }
+
+.socialLinks { display: flex; gap: 12px; margin: 0 0 42px; }
+.socialLinks a { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #fff; border-radius: 50%; }
+.socialLinks svg { width: 17px; height: 17px; }
+.paymentHeading { margin-bottom: 16px !important; }
+
+.paymentMethods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.paymentMethods li {
+  min-width: 45px;
+  height: 29px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #fff;
+  color: #171717;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.paymentMethods .googlePay { color: #4285f4; font-size: 8px; }
+.paymentMethods .paypal { color: #123984; font-style: italic; }
+.paymentMethods .amex { background: #2673c7; color: #fff; font-size: 8px; }
+.paymentMethods .applePay { color: #111; font-size: 10px; }
+.paymentMethods .upi { background: #5b3096; color: #fff; font-size: 10px; }
+.mastercard { position: relative; }
+.mastercard > span:first-child { position: relative; width: 28px; height: 16px; display: flex; align-items: center; justify-content: center; }
+.mastercard i { width: 14px; height: 14px; display: block; border-radius: 50%; background: #eb001b; }
+.mastercard i + i { margin-left: -5px; background: #f79e1b; mix-blend-mode: multiply; }
+
+.copyright { color: #aaa; font-size: 11px; text-align: center; }
+
+.footer a:focus-visible,
+.newsletterForm input:focus-visible,
+.newsletterForm button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .container { width: min(100% - 48px, 1280px); }
+  .topSection { gap: 36px; grid-template-columns: 1fr 1fr; }
+  .contactCurrency { grid-template-columns: 1fr; gap: 28px; }
+  .bottomSection { gap: 32px; }
+}
+
+@media (max-width: 620px) {
+  .container { width: 100%; padding: 17px 15px 13px; }
+  .topSection { grid-template-columns: 1fr; gap: 0; padding-bottom: 0; }
+  .footer h2 { font-size: 12px; margin-bottom: 8px; }
+  .newsletter { padding-bottom: 15px; border-bottom: 1px solid #4b4b4b; }
+  .newsletter > h2 { margin-bottom: 7px; }
+  .desktopDescription, .desktopContactHeading { display: none; }
+  .mobileDescription, .mobileContactHeading { display: initial; }
+  .newsletter > .mobileDescription { max-width: 100%; margin-bottom: 11px; color: #e5e5e5; font-size: 10px; line-height: 1.45; }
+  .newsletterForm { width: 100%; gap: 6px; }
+  .newsletterForm input { height: 35px; padding: 0 9px; font-size: 10px; }
+  .newsletterForm button { flex: 0 0 92px; min-width: 0; height: 35px; padding: 0 5px; font-size: 9px; }
+  .contactCurrency { grid-template-columns: 1fr; gap: 0; }
+  .contact { padding: 13px 0 14px; border-bottom: 1px solid #4b4b4b; }
+  .contact h2 { margin-bottom: 7px; }
+  .contactDetails { flex-direction: row; align-items: center; gap: 5px; white-space: nowrap; }
+  .contactDetails a { margin: 0; color: #f1f1f1; font-size: clamp(8px, 2.7vw, 10px); }
+  .contactSeparator { display: inline; color: #aaa; font-size: 10px; }
+  .currency { padding: 13px 0 14px; border-bottom: 1px solid #4b4b4b; }
+  .currency h2 { margin-bottom: 8px; }
+  .currencyName { margin: 0; gap: 5px; font-size: 11px; }
+  .currencyNote { display: none; }
+  .flag { width: 15px; height: 15px; font-size: 14px; }
+  .divider { display: none; }
+  .bottomSection { grid-template-columns: 1fr; gap: 0; padding: 0; }
+  .footerColumn { min-width: 0; }
+  .accordionHeading {
+    min-height: 40px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    cursor: default;
+  }
+  .mobileAccordionHeading {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    border: 0;
+    border-bottom: 1px solid #4b4b4b;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+  .mobileAccordionHeading::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    margin: -4px 3px 0 12px;
+    flex: 0 0 auto;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform: rotate(45deg);
+    transition: transform 120ms ease;
+  }
+  .mobileAccordionHeading[aria-expanded="true"]::after { margin-top: 4px; transform: rotate(225deg); }
+  .desktopAccordionHeading { display: none; }
+  .accordionContent { display: none; padding: 0 0 12px; }
+  .accordionOpen { display: block; border-bottom: 1px solid #4b4b4b; }
+  .mobileAccordionHeading:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .brand { font-size: 11px; }
+  .linkList { gap: 8px; }
+  .linkList a { font-size: 10px; }
+  .socialLinks { gap: 10px; margin: 0; }
+  .socialLinks a { width: 30px; height: 30px; }
+  .paymentSection { padding: 14px 0 16px; }
+  .paymentHeading { margin: 0 0 9px !important; }
+  .paymentMethods { flex-wrap: nowrap; gap: 4px; }
+  .paymentMethods li { min-width: 0; height: 24px; padding: 0 3px; flex: 1 1 0; border-radius: 3px; font-size: 6.5px; }
+  .paymentMethods .googlePay { font-size: 6px; }
+  .paymentMethods .paypal { font-size: 7px; }
+  .paymentMethods .amex { font-size: 6px; }
+  .paymentMethods .applePay { font-size: 7px; }
+  .paymentMethods .upi { background: #5b3096; color: transparent; font-size: 0; }
+  .paymentMethods .upi::after { content: "O Pay"; color: #fff; font-size: 7px; }
+  .mastercard > span:first-child { width: 23px; }
+  .mastercard i { width: 12px; height: 12px; }
+  .copyright { padding: 3px 0 4px; font-size: 8px; line-height: 1.4; }
+}
+
+@media (max-width: 380px) {
+  .contactDetails { gap: 4px; }
+  .contactDetails a { font-size: 8px; }
+  .paymentMethods { gap: 3px; }
+  .paymentMethods li { padding: 0 2px; }
+}

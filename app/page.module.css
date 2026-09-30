@@ -1,3 +1,7 @@
+body{
+  background: #fff;
+}
+
 .hero {
   display: flex;
   justify-content: center;
