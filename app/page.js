@@ -1,7 +1,21 @@
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ProductListing from "../components/ProductListing";
+import { getCompleteProductDataset, PRODUCTS_PER_PAGE } from "../lib/products";
 import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home({ searchParams }) {
+  const query = await searchParams;
+  const requestedPage = Number.parseInt(query.page, 10);
+  const currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const { products, error } = await getCompleteProductDataset();
+  const pageCount = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+
+  if (pageCount > 0 && currentPage > pageCount) {
+    redirect(pageCount === 1 ? "/" : `/?page=${pageCount}`);
+  }
+
   return (
     <>
       <Header />
@@ -16,6 +30,11 @@ export default function Home() {
             </p>
           </div>
         </section>
+        <ProductListing
+          products={products}
+          currentPage={currentPage}
+          hasLoadError={error}
+        />
       </main>
       <Footer />
     </>
