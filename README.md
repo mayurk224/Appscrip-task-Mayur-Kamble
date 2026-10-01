@@ -1,5 +1,7 @@
 # store-page
 
+Live URL: **<https://appscrip-task-mayur-kamble.netlify.app/>**
+
 ## Overview
 
 store-page is a frontend e-commerce product listing page built with Next.js. It displays a catalog of products fetched from the DummyJSON mock API, allowing users to browse, filter, sort, and paginate through items. The page features a store header with navigation, a hero section, a filterable product grid, and a detailed footer.
