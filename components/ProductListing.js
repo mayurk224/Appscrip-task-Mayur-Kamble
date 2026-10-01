@@ -95,7 +95,11 @@ const ProductGrid = memo(function ProductGrid({ products, wishlist, onToggleWish
         return (
           <article className={styles.productCard} key={product.id}>
             <div className={styles.productImage}>
-              <img src={product.image} alt={product.title} loading="lazy" />
+              <img
+                src={product.image}
+                alt={product.brand ? `${product.title} by ${product.brand}` : product.title}
+                loading="lazy"
+              />
               <button
                 className={styles.wishlistButton}
                 type="button"

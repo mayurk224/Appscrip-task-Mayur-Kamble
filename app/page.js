@@ -16,8 +16,37 @@ export default async function Home({ searchParams }) {
     redirect(pageCount === 1 ? "/" : `/?page=${pageCount}`);
   }
 
+  const listedProducts = products.slice(
+    (currentPage - 1) * PRODUCTS_PER_PAGE,
+    currentPage * PRODUCTS_PER_PAGE,
+  );
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Discover our product",
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: products.length,
+      itemListElement: listedProducts.map((product, index) => ({
+        "@type": "ListItem",
+        position: (currentPage - 1) * PRODUCTS_PER_PAGE + index + 1,
+        item: {
+          "@type": "Product",
+          name: product.title,
+          ...(product.image ? { image: product.image } : {}),
+          ...(product.category ? { category: product.category } : {}),
+          ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
+        },
+      })),
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <main>
         <section className={styles.hero} aria-labelledby="hero-title">

@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Product listing SEO
+
+The product listing emits server-rendered JSON-LD describing the products on the current page as a `CollectionPage` containing an `ItemList`. Product entries include only the name, image, category, and brand when those fields are present in the DummyJSON response; ratings and offer details are omitted because the API data does not provide all fields needed to represent them reliably.
+
+Product thumbnails are supplied by DummyJSON, and this project does not include local product image assets. Their source URLs and filenames therefore remain controlled by DummyJSON. The listing uses descriptive product titles (and brand names when available) as image alt text. Replacing the remote thumbnails with SEO-named local files requires a licensed, project-controlled image set.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
