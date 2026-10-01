@@ -58,6 +58,7 @@
 }
 
 .catalogLayout.sidebarHidden { grid-template-columns: minmax(0, 1fr); }
+.catalogLayout.sidebarHidden .productGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .results { position: relative; min-width: 0; }
 
 .updatingIndicator {
@@ -96,6 +97,24 @@
 
 .sidebar { min-width: 0; }
 
+.clearFiltersButton {
+  width: 100%;
+  min-height: 40px;
+  margin-bottom: 12px;
+  padding: 0 12px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  color: #252525;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: left;
+  cursor: pointer;
+}
+.clearFiltersButton:hover:not(:disabled) { border-color: #252525; }
+.clearFiltersButton:disabled { color: #999; cursor: default; }
+
 .filter { border-bottom: 1px solid #e8e8e8; }
 
 .filter summary {
@@ -113,7 +132,19 @@
 .filter summary::after { content: "+"; color: #666; font-size: 18px; font-weight: 400; }
 .filter[open] summary::after { content: "−"; }
 
-.filterOptions { display: grid; gap: 12px; padding: 0 0 16px; }
+.filterOptions {
+  display: grid;
+  gap: 12px;
+  max-height: min(240px, 32vh);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: 0 8px 16px 0;
+  scrollbar-color: #c6c6c6 transparent;
+  scrollbar-width: thin;
+}
+.filterOptions::-webkit-scrollbar { width: 6px; }
+.filterOptions::-webkit-scrollbar-thumb { border-radius: 6px; background: #c6c6c6; }
+.filterOptions::-webkit-scrollbar-track { background: transparent; }
 .filterOptions label { display: flex; align-items: center; gap: 9px; color: #555; font-size: 13px; cursor: pointer; }
 .filterOptions input { width: 15px; height: 15px; accent-color: #252525; }
 
@@ -200,6 +231,7 @@
 }
 
 .sidebarButton:focus-visible,
+.clearFiltersButton:focus-visible,
 .sortControl select:focus-visible,
 .filter summary:focus-visible,
 .filterOptions input:focus-visible,
@@ -212,6 +244,7 @@
 @media (max-width: 900px) {
   .catalogLayout { grid-template-columns: 190px minmax(0, 1fr); gap: 20px; }
   .productGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+  .catalogLayout.sidebarHidden .productGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {
@@ -227,8 +260,9 @@
   .sortControl select { max-width: 118px; font-size: 11px; }
   .catalogLayout, .catalogLayout.sidebarHidden { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .sidebar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
+  .clearFiltersButton { grid-column: 1 / -1; }
   .filter summary { min-height: 44px; font-size: 12px; }
-  .filterOptions { grid-column: 1 / -1; }
+  .filterOptions { grid-column: 1 / -1; max-height: min(190px, 28vh); }
   .productGrid { gap: 24px 12px; }
   .wishlistButton { top: 8px; right: 8px; width: 34px; height: 34px; }
   .productDetails h2 { font-size: 12px; }

@@ -8,16 +8,25 @@ const filterFields = [
   { key: "category", label: "Category" },
   { key: "brand", label: "Brand" },
   { key: "tags", label: "Tags" },
+  { key: "rating", label: "Rating" },
 ];
+const ratingOptions = [5, 4, 3, 2, 1];
 const LOADING_INDICATOR_DURATION_MS = 220;
 
 function buildFilters(products) {
   return filterFields.map(({ key, label }) => ({
     key,
     label,
-    options: [...new Set(products.flatMap((product) => key === "tags" ? product.tags : product[key] ? [product[key]] : []))]
-      .sort((a, b) => a.localeCompare(b)),
+    options: key === "rating"
+      ? ratingOptions.map(String)
+      : [...new Set(products.flatMap((product) => key === "tags" ? product.tags : product[key] ? [product[key]] : []))]
+        .sort((a, b) => a.localeCompare(b)),
   }));
+}
+
+function formatRatingOption(option) {
+  const rating = Number(option);
+  return `${"★".repeat(rating)}${"☆".repeat(5 - rating)} & up`;
 }
 
 function HeartIcon({ filled }) {
@@ -55,17 +64,20 @@ const ProductToolbar = memo(function ProductToolbar({ total, sidebarVisible, onT
   );
 });
 
-const FilterSidebar = memo(function FilterSidebar({ filters, selectedFilters, onFilterChange }) {
+const FilterSidebar = memo(function FilterSidebar({ filters, selectedFilters, onFilterChange, onClearFilters, hasSelectedFilters }) {
   return (
     <aside className={styles.sidebar} aria-label="Filter products">
+      <button className={styles.clearFiltersButton} type="button" onClick={onClearFilters} disabled={!hasSelectedFilters}>
+        Clear Filters
+      </button>
       {filters.map(({ key, label, options }) => (
         <details className={styles.filter} key={key}>
           <summary>{label}</summary>
           <div className={styles.filterOptions}>
             {options.map((option) => (
               <label key={option}>
-                <input type="checkbox" checked={selectedFilters[key] === option} onChange={() => onFilterChange(key, option)} />
-                <span>{option}</span>
+                <input type="checkbox" checked={selectedFilters[key]?.includes(option) ?? false} onChange={() => onFilterChange(key, option)} />
+                <span>{key === "rating" ? formatRatingOption(option) : option}</span>
               </label>
             ))}
           </div>
@@ -148,14 +160,16 @@ export default function ProductListing({ products: allProducts, currentPage: ini
   const [sortBy, setSortBy] = useState("recommended");
   const [wishlist, setWishlist] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const hasSelectedFilters = Object.values(selectedFilters).some((options) => options.length > 0);
   const filters = useMemo(() => buildFilters(allProducts), [allProducts]);
 
   const filteredProducts = useMemo(() => allProducts.filter((product) =>
     filters.every(({ key }) => {
-      if (!selectedFilters[key]) return true;
-      return key === "tags"
-        ? product.tags?.includes(selectedFilters[key])
-        : product[key] === selectedFilters[key];
+      const selectedOptions = selectedFilters[key] ?? [];
+      if (selectedOptions.length === 0) return true;
+      if (key === "tags") return selectedOptions.some((option) => product.tags?.includes(option));
+      if (key === "rating") return selectedOptions.some((option) => product.rating >= Number(option));
+      return selectedOptions.includes(product[key]);
     }),
   ), [allProducts, filters, selectedFilters]);
   const pageCount = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
@@ -192,10 +206,20 @@ export default function ProductListing({ products: allProducts, currentPage: ini
   const updateFilter = useCallback((key, value) => {
     setSelectedFilters((current) => {
       const next = { ...current };
-      if (next[key] === value) delete next[key];
-      else next[key] = value;
+      const selectedOptions = next[key] ?? [];
+      if (selectedOptions.includes(value)) {
+        next[key] = selectedOptions.filter((option) => option !== value);
+        if (next[key].length === 0) delete next[key];
+      } else {
+        next[key] = [...selectedOptions, value];
+      }
       return next;
     });
+    setCurrentPage(1);
+    updatePageUrl(1, "replaceState");
+  }, []);
+  const clearFilters = useCallback(() => {
+    setSelectedFilters({});
     setCurrentPage(1);
     updatePageUrl(1, "replaceState");
   }, []);
@@ -216,7 +240,7 @@ export default function ProductListing({ products: allProducts, currentPage: ini
     <section className={styles.catalog} aria-label="Products" ref={catalogRef}>
       <ProductToolbar total={filteredProducts.length} sidebarVisible={sidebarVisible} onToggleSidebar={toggleSidebar} onSortChange={handleSortChange} sortBy={sortBy} />
       <div className={`${styles.catalogLayout} ${!sidebarVisible ? styles.sidebarHidden : ""}`}>
-        {sidebarVisible && <FilterSidebar filters={filters} selectedFilters={selectedFilters} onFilterChange={updateFilter} />}
+        {sidebarVisible && <FilterSidebar filters={filters} selectedFilters={selectedFilters} onFilterChange={updateFilter} onClearFilters={clearFilters} hasSelectedFilters={hasSelectedFilters} />}
         <div className={styles.results} aria-busy={isUpdating}>
           {isUpdating && (
             <div className={styles.updatingIndicator} role="status">
