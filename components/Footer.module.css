@@ -180,15 +180,15 @@
   .newsletter > h2 { margin-bottom: 7px; }
   .desktopDescription, .desktopContactHeading { display: none; }
   .mobileDescription, .mobileContactHeading { display: initial; }
-  .newsletter > .mobileDescription { max-width: 100%; margin-bottom: 11px; color: #e5e5e5; font-size: 10px; line-height: 1.45; }
+  .newsletter > .mobileDescription { max-width: 100%; margin-bottom: 11px; color: #e5e5e5; font-size: 12px; line-height: 1.45; }
   .newsletterForm { width: 100%; gap: 6px; }
-  .newsletterForm input { height: 35px; padding: 0 9px; font-size: 10px; }
-  .newsletterForm button { flex: 0 0 92px; min-width: 0; height: 35px; padding: 0 5px; font-size: 9px; }
+  .newsletterForm input { height: 42px; padding: 0 9px; font-size: 12px; }
+  .newsletterForm button { flex: 0 0 100px; min-width: 0; height: 42px; padding: 0 5px; font-size: 10px; }
   .contactCurrency { grid-template-columns: 1fr; gap: 0; }
   .contact { padding: 13px 0 14px; border-bottom: 1px solid #4b4b4b; }
   .contact h2 { margin-bottom: 7px; }
-  .contactDetails { flex-direction: row; align-items: center; gap: 5px; white-space: nowrap; }
-  .contactDetails a { margin: 0; color: #f1f1f1; font-size: clamp(8px, 2.7vw, 10px); }
+  .contactDetails { flex-wrap: wrap; flex-direction: row; align-items: center; gap: 5px; }
+  .contactDetails a { margin: 0; color: #f1f1f1; font-size: clamp(10px, 2.9vw, 12px); overflow-wrap: anywhere; }
   .contactSeparator { display: inline; color: #aaa; font-size: 10px; }
   .currency { padding: 13px 0 14px; border-bottom: 1px solid #4b4b4b; }
   .currency h2 { margin-bottom: 8px; }
@@ -238,27 +238,19 @@
   .mobileAccordionHeading:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .brand { font-size: 11px; }
   .linkList { gap: 8px; }
-  .linkList a { font-size: 10px; }
+  .linkList a { font-size: 12px; }
   .socialLinks { gap: 10px; margin: 0; }
   .socialLinks a { width: 30px; height: 30px; }
   .paymentSection { padding: 14px 0 16px; }
   .paymentHeading { margin: 0 0 9px !important; }
-  .paymentMethods { flex-wrap: nowrap; gap: 4px; }
-  .paymentMethods li { min-width: 0; height: 24px; padding: 0 3px; flex: 1 1 0; border-radius: 3px; font-size: 6.5px; }
-  .paymentMethods .googlePay { font-size: 6px; }
-  .paymentMethods .paypal { font-size: 7px; }
-  .paymentMethods .amex { font-size: 6px; }
-  .paymentMethods .applePay { font-size: 7px; }
-  .paymentMethods .upi { background: #5b3096; color: transparent; font-size: 0; }
-  .paymentMethods .upi::after { content: "O Pay"; color: #fff; font-size: 7px; }
+  .paymentMethods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .paymentMethods li { min-width: 0; height: 30px; padding: 0 3px; border-radius: 3px; font-size: 9px; }
+  .paymentMethods .googlePay { font-size: 8px; }
+  .paymentMethods .paypal { font-size: 9px; }
+  .paymentMethods .amex { font-size: 8px; }
+  .paymentMethods .applePay { font-size: 9px; }
+  .paymentMethods .upi { background: #5b3096; color: #fff; font-size: 9px; }
   .mastercard > span:first-child { width: 23px; }
   .mastercard i { width: 12px; height: 12px; }
-  .copyright { padding: 3px 0 4px; font-size: 8px; line-height: 1.4; }
-}
-
-@media (max-width: 380px) {
-  .contactDetails { gap: 4px; }
-  .contactDetails a { font-size: 8px; }
-  .paymentMethods { gap: 3px; }
-  .paymentMethods li { padding: 0 2px; }
+  .copyright { padding: 3px 0 4px; font-size: 10px; line-height: 1.4; }
 }

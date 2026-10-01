@@ -145,8 +145,8 @@
 .filterOptions::-webkit-scrollbar { width: 6px; }
 .filterOptions::-webkit-scrollbar-thumb { border-radius: 6px; background: #c6c6c6; }
 .filterOptions::-webkit-scrollbar-track { background: transparent; }
-.filterOptions label { display: flex; align-items: center; gap: 9px; color: #555; font-size: 13px; cursor: pointer; }
-.filterOptions input { width: 15px; height: 15px; accent-color: #252525; }
+.filterOptions label { display: flex; align-items: center; gap: 9px; min-height: 40px; color: #555; font-size: 13px; line-height: 1.35; cursor: pointer; }
+.filterOptions input { width: 18px; height: 18px; flex: 0 0 18px; accent-color: #252525; }
 
 .productGrid {
   display: grid;
@@ -170,8 +170,8 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 0;
@@ -184,7 +184,16 @@
 .wishlistButton svg { width: 21px; height: 21px; }
 .wishlistButton[aria-pressed="true"] { color: #b34040; }
 .productDetails { padding-top: 12px; }
-.productDetails h2 { overflow: hidden; font-size: 14px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+.productDetails h2 {
+  display: -webkit-box;
+  min-height: 2.7em;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 .priceRating { display: flex; align-items: center; justify-content: space-between; gap: 9px; color: #555; font-size: 16px; margin-top: 7px; }
 .rating { color: #555; }
 .rating span { color: #b18535; }
@@ -264,7 +273,7 @@
   .filter summary { min-height: 44px; font-size: 12px; }
   .filterOptions { grid-column: 1 / -1; max-height: min(190px, 28vh); }
   .productGrid { gap: 24px 12px; }
-  .wishlistButton { top: 8px; right: 8px; width: 34px; height: 34px; }
+  .wishlistButton { top: 8px; right: 8px; }
   .productDetails h2 { font-size: 12px; }
   .price, .rating { font-size: 11px; }
   .pagination { gap: 5px; margin-top: 26px; }

@@ -222,6 +222,7 @@
   max-width: 1440px;
   margin: 0 auto;
   gap: 32px;
+  min-width: 0;
 }
 
 .breadcrumb {
@@ -327,6 +328,7 @@
   .languageLabel { display: none; }
   .navigation { min-height: 48px; padding: 0 18px; gap: 16px; }
   .navLinks { display: none; }
+  .breadcrumb { display: flex; }
   .breadcrumb li,
   .breadcrumb a {
     font-size: 11px;
@@ -341,13 +343,12 @@
   .hamburgerButton { min-width: 48px; min-height: 48px; width: 48px; height: 48px; padding: 8px; }
   .hamburgerButton svg { width: 24px; height: 24px; }
   .logo { width: 28px; height: 28px; }
-  .storeName { font-size: 13px; letter-spacing: 0.08em; }
+  .storeName { position: static; transform: none; margin-left: 8px; font-size: 13px; letter-spacing: 0.08em; }
   .actions { gap: 0; }
-  .iconButton { min-width: 40px; min-height: 40px; width: 40px; height: 40px; padding: 4px; }
+  .iconButton { min-width: 44px; min-height: 44px; width: 44px; height: 44px; padding: 4px; }
   .iconButton svg { width: 18px; height: 18px; }
   .navigation { padding: 0 12px; gap: 12px; min-height: 44px; }
   .navLinks { display: none; }
-  .breadcrumb { display: flex; }
   .breadcrumb li,
   .breadcrumb a {
     font-size: 10px;
@@ -367,30 +368,23 @@
 }
 
 @media (max-width: 375px) {
-  .topRow { padding: 0 10px; gap: 6px; }
-  .iconButton { min-width: 42px; width: 42px; padding: 6px; }
-  .storeName { font-size: 12px; letter-spacing: 0.06em; }
-  .mobileMenu { padding: 12px 10px; }
-}
-
-@media (max-width: 320px) {
-  .topRow { padding: 0 8px; gap: 4px; }
+  .topRow { padding: 0 8px; gap: 2px; }
   .hamburgerButton { min-width: 44px; min-height: 44px; width: 44px; height: 44px; padding: 6px; }
   .hamburgerButton svg { width: 22px; height: 22px; }
   .logo { width: 24px; height: 24px; }
-  .storeName { font-size: 11px; letter-spacing: 0.05em; }
-  .iconButton { min-width: 40px; min-height: 44px; width: 40px; height: 44px; padding: 5px; }
+  .storeName { position: static; transform: none; margin-left: 4px; font-size: 11px; letter-spacing: 0.04em; }
+  .iconButton { min-width: 44px; min-height: 44px; width: 44px; height: 44px; padding: 5px; }
   .iconButton svg { width: 16px; height: 16px; }
-  .navigation { padding: 0 8px; gap: 8px; min-height: 40px; }
+  .navigation { padding: 0 8px; gap: 8px; min-height: 44px; }
   .breadcrumb li,
   .breadcrumb a {
-    font-size: 9px;
-    min-height: 40px;
+    font-size: 10px;
+    min-height: 44px;
   }
-  .mobileMenu { padding: 10px 8px; }
+  .mobileMenu { padding: 12px 8px; }
   .mobileNav a {
     min-height: 44px;
-    font-size: 12px;
+    font-size: 13px;
     padding: 0 8px;
   }
   .mobileMenuItem {

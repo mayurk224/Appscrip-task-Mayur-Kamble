@@ -94,7 +94,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className={styles.navigation} aria-label="Main navigation">
+      <div className={styles.navigation}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <ol>
             <li>
@@ -105,10 +105,10 @@ export default function Header() {
             </li>
           </ol>
         </nav>
-        <div className={styles.navLinks}>
+        <nav className={styles.navLinks} aria-label="Main navigation">
           {navigationItems.map((item) => <a href="#" key={item}>{item}</a>)}
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }
