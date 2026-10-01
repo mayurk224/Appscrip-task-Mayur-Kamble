@@ -159,6 +159,7 @@ function updatePageUrl(page, method = "pushState") {
 export default function ProductListing({ products: allProducts, currentPage: initialPage, hasLoadError }) {
   const catalogRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(initialPage);
+  const [invalidPage, setInvalidPage] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const [sortBy, setSortBy] = useState("recommended");
@@ -188,10 +189,17 @@ export default function ProductListing({ products: allProducts, currentPage: ini
 
   useEffect(() => {
     function syncPageFromHistory() {
-      const parsedPage = Number.parseInt(new URL(window.location.href).searchParams.get("page") ?? "1", 10);
-      const page = Number.isInteger(parsedPage) ? Math.min(Math.max(parsedPage, 1), pageCount || 1) : 1;
-      setCurrentPage(page);
-      if (page !== parsedPage) updatePageUrl(page, "replaceState");
+      const params = new URL(window.location.href).searchParams;
+      const pageValues = params.getAll("page");
+      const pageValue = pageValues.length === 0 ? "1" : pageValues[0];
+      const page = /^\d+$/.test(pageValue) ? Number(pageValue) : NaN;
+      const isValidPage = pageValues.length <= 1
+        && Number.isSafeInteger(page)
+        && page > 0
+        && (pageCount > 0 ? page <= pageCount : page === 1);
+
+      setInvalidPage(!isValidPage);
+      if (isValidPage) setCurrentPage(page);
     }
 
     window.addEventListener("popstate", syncPageFromHistory);
@@ -220,11 +228,13 @@ export default function ProductListing({ products: allProducts, currentPage: ini
       return next;
     });
     setCurrentPage(1);
+    setInvalidPage(false);
     updatePageUrl(1, "replaceState");
   }, []);
   const clearFilters = useCallback(() => {
     setSelectedFilters({});
     setCurrentPage(1);
+    setInvalidPage(false);
     updatePageUrl(1, "replaceState");
   }, []);
   const toggleWishlist = useCallback((productId) => {
@@ -235,6 +245,7 @@ export default function ProductListing({ products: allProducts, currentPage: ini
   const changePage = useCallback((page) => {
     if (page < 1 || page > pageCount || page === currentPage) return;
     setIsUpdating(true);
+    setInvalidPage(false);
     catalogRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     setCurrentPage(page);
     updatePageUrl(page);
@@ -252,7 +263,9 @@ export default function ProductListing({ products: allProducts, currentPage: ini
               <span>Updating products…</span>
             </div>
           )}
-          {visibleProducts.length > 0 ? (
+          {invalidPage ? (
+            <p className={styles.emptyState} role="alert">This page is not available.</p>
+          ) : visibleProducts.length > 0 ? (
             <ProductGrid products={visibleProducts} wishlist={wishlist} onToggleWishlist={toggleWishlist} />
           ) : (
             <p className={styles.emptyState} role={hasLoadError ? "alert" : undefined}>
@@ -261,7 +274,7 @@ export default function ProductListing({ products: allProducts, currentPage: ini
           )}
         </div>
       </div>
-      <Pagination currentPage={currentPage} pageCount={pageCount} onPageChange={changePage} isUpdating={isUpdating} />
+      {!invalidPage && <Pagination currentPage={currentPage} pageCount={pageCount} onPageChange={changePage} isUpdating={isUpdating} />}
     </section>
   );
 }

@@ -3,18 +3,25 @@ import Footer from "../components/Footer";
 import ProductListing from "../components/ProductListing";
 import { getCompleteProductDataset, PRODUCTS_PER_PAGE } from "../lib/products";
 import styles from "./page.module.css";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
+
+function parseRequestedPage(value) {
+  if (value === undefined) return 1;
+  if (typeof value !== "string" || !/^\d+$/.test(value)) return null;
+
+  const page = Number(value);
+  return Number.isSafeInteger(page) && page > 0 ? page : null;
+}
 
 export default async function Home({ searchParams }) {
   const query = await searchParams;
-  const requestedPage = Number.parseInt(query.page, 10);
-  const currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const currentPage = parseRequestedPage(query.page);
+  if (currentPage === null) notFound();
+
   const { products, error } = await getCompleteProductDataset();
   const pageCount = Math.ceil(products.length / PRODUCTS_PER_PAGE);
 
-  if (pageCount > 0 && currentPage > pageCount) {
-    redirect(pageCount === 1 ? "/" : `/?page=${pageCount}`);
-  }
+  if (pageCount > 0 ? currentPage > pageCount : currentPage > 1) notFound();
 
   const listedProducts = products.slice(
     (currentPage - 1) * PRODUCTS_PER_PAGE,
